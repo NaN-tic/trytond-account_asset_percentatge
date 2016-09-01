@@ -1,0 +1,24 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:account.asset,frequency_percentatge:"
+msgid "Frequency Percentatge"
+msgstr "Percentatge freqüència"
+
+msgctxt "field:account.asset,purchase_value:"
+msgid "Purchase Value"
+msgstr "Valor compra"
+
+msgctxt "help:account.asset,frequency_percentatge:"
+msgid "This percentatge will be calculate the End Date"
+msgstr "Aquest percentatge calcularà la data final."
+
+msgctxt "selection:account.asset,frequency:"
+msgid "Percentatge"
+msgstr "Percentatge"
+
+#, fuzzy
+msgctxt "view:account.asset:"
+msgid "%"
+msgstr "%"
