@@ -24,12 +24,16 @@ class Template:
 
     @fields.depends('depreciation_percentatge')
     def on_change_depreciation_percentatge(self):
+        changes = {}
         if self.depreciation_percentatge:
-            self.depreciation_duration = (
+            changes['depreciation_duration'] = (
                 12 * self.depreciation_percentatge) / 100
+        return changes
 
     @fields.depends('depreciation_duration')
     def on_change_depreciation_duration(self):
+        changes = {}
         if self.depreciation_duration:
-            self.depreciation_percentatge = (
+            changes['depreciation_percentatge'] = (
                 self.depreciation_duration * 100) / 12
+        return changes
