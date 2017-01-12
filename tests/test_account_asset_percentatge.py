@@ -6,6 +6,7 @@ import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT, test_view,\
     test_depends
 from trytond.transaction import Transaction
+from decimal import Decimal
 
 
 class AccountAssetPercentatgeTestCase(unittest.TestCase):
@@ -27,24 +28,25 @@ class AccountAssetPercentatgeTestCase(unittest.TestCase):
         with Transaction().start(DB_NAME, USER,
                 context=CONTEXT) as transaction:
             template1 = self.template()
-            template1.depreciation_percentatge = 100
+            template1.depreciation_percentatge = 1
             r = template1.on_change_depreciation_percentatge()
             self.assertEqual(r['depreciation_duration'], 12)
 
             template2 = self.template()
-            template2.depreciation_percentatge = 200
+            template2.depreciation_percentatge = 0.5
             r = template2.on_change_depreciation_percentatge()
             self.assertEqual(r['depreciation_duration'], 24)
 
             template3 = self.template()
-            template3.depreciation_duration = 6
+            template3.depreciation_duration = Decimal('6')
             r = template3.on_change_depreciation_duration()
-            self.assertEqual(r['depreciation_percentatge'], 50)
+            self.assertEqual(r['depreciation_percentatge'], Decimal('2'))
 
             template4 = self.template()
-            template4.depreciation_duration = 18
+            template4.depreciation_duration = Decimal('18')
             r = template4.on_change_depreciation_duration()
-            self.assertEqual(r['depreciation_percentatge'], 150)
+            self.assertEqual(r['depreciation_percentatge'],
+                Decimal('0.6666666666666666666666666667'))
 
 
 def suite():
