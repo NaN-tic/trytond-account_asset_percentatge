@@ -12,7 +12,7 @@ class Template:
     __metaclass__ = PoolMeta
     __name__ = 'product.template'
     depreciation_percentatge = fields.Property(fields.Numeric(
-            'Depreciation Percentatge', digits=(16, 0),
+            'Depreciation Percentatge', digits=(16, 4),
             states={
                 'readonly': ~Eval('active', True),
                 'invisible': (~Eval('depreciable')
@@ -25,11 +25,13 @@ class Template:
     @fields.depends('depreciation_percentatge')
     def on_change_depreciation_percentatge(self):
         if self.depreciation_percentatge:
-            self.depreciation_duration = (
-                12 * self.depreciation_percentatge) / 100
+            depreciation_duration = (12 / self.depreciation_percentatge)
+            self.depreciation_duration = int(round(depreciation_duration))
+            self.depreciation_percentatge = (
+                12 / depreciation_duration)
 
     @fields.depends('depreciation_duration')
     def on_change_depreciation_duration(self):
         if self.depreciation_duration:
             self.depreciation_percentatge = (
-                self.depreciation_duration * 100) / 12
+                12 / self.depreciation_duration)

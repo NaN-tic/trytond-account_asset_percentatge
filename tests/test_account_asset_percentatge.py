@@ -5,6 +5,7 @@ import unittest
 from trytond.tests.test_tryton import ModuleTestCase, with_transaction
 from trytond.tests.test_tryton import suite as test_suite
 from trytond.pool import Pool
+from decimal import Decimal
 
 
 class AccountAssetPercentatgeTestCase(ModuleTestCase):
@@ -17,24 +18,25 @@ class AccountAssetPercentatgeTestCase(ModuleTestCase):
         Template = Pool().get('product.template')
 
         template1 = Template()
-        template1.depreciation_percentatge = 100
+        template1.depreciation_percentatge = 1
         template1.on_change_depreciation_percentatge()
         self.assertEqual(template1.depreciation_duration, 12)
 
         template2 = Template()
-        template2.depreciation_percentatge = 200
+        template2.depreciation_percentatge = 0.5
         template2.on_change_depreciation_percentatge()
         self.assertEqual(template2.depreciation_duration, 24)
 
         template3 = Template()
-        template3.depreciation_duration = 6
+        template3.depreciation_duration = Decimal('6')
         template3.on_change_depreciation_duration()
-        self.assertEqual(template3.depreciation_percentatge, 50)
+        self.assertEqual(template3.depreciation_percentatge, Decimal('2'))
 
         template4 = Template()
-        template4.depreciation_duration = 18
+        template4.depreciation_duration = Decimal('18')
         template4.on_change_depreciation_duration()
-        self.assertEqual(template4.depreciation_percentatge, 150)
+        self.assertEqual(template4.depreciation_percentatge,
+            Decimal('0.6666666666666666666666666667'))
 
 
 def suite():

@@ -6,6 +6,6 @@ copyright notices and license terms. -->
     <xpath expr="/form/notebook/page[@id='accounting']/field[@name='depreciation_duration']"
             position="after">
         <label name="depreciation_percentatge"/>
-        <field name="depreciation_percentatge"/>
+        <field name="depreciation_percentatge" factor="100"/>
     </xpath>
 </data>
