@@ -6,7 +6,7 @@ from trytond.pyson import Eval
 from trytond.pool import PoolMeta, Pool
 from trytond import backend
 
-__all__ = ['Template']
+__all__ = ['Template', 'TemplateAccount']
 
 
 class Template:
