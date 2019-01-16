@@ -10,5 +10,4 @@ def register():
     Pool.register(
         asset.Asset,
         product.Template,
-        product.TemplateAccount,
         module='account_asset_percentatge', type_='model')
