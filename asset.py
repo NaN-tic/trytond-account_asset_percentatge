@@ -8,8 +8,7 @@ from trytond.pool import PoolMeta
 __all__ = ['Asset']
 
 
-class Asset:
-    __metaclass__ = PoolMeta
+class Asset(metaclass=PoolMeta):
     __name__ = 'account.asset'
     purchase_value = fields.Numeric('Purchase Value',
         digits=(16, Eval('currency_digits', 2)), states={
