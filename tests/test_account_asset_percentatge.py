@@ -35,9 +35,7 @@ class AccountAssetPercentatgeTestCase(ModuleTestCase):
         template4 = Template()
         template4.depreciation_duration = Decimal('18')
         template4.on_change_depreciation_duration()
-        self.assertEqual(template4.depreciation_percentatge,
-            Decimal('0.6666666666666666666666666667'))
-
+        self.assertEqual(template4.depreciation_percentatge, Decimal('0.6667'))
 
 def suite():
     suite = test_suite()
