@@ -4,6 +4,7 @@
 from trytond.model import fields
 from trytond.pyson import Eval
 from trytond.pool import PoolMeta
+from decimal import Decimal
 
 
 class Template(metaclass=PoolMeta):
@@ -24,11 +25,15 @@ class Template(metaclass=PoolMeta):
         if self.depreciation_percentatge:
             depreciation_duration = (12 / self.depreciation_percentatge)
             self.depreciation_duration = int(round(depreciation_duration))
-            self.depreciation_percentatge = (
-                12 / depreciation_duration)
+            digits = self.__class__.depreciation_percentatge.digits
+            self.depreciation_percentatge = Decimal(
+                12 / depreciation_duration).quantize(
+                Decimal(str(10 ** -digits[1])))
 
     @fields.depends('depreciation_duration')
     def on_change_depreciation_duration(self):
         if self.depreciation_duration:
-            self.depreciation_percentatge = (
-                12 / self.depreciation_duration)
+            digits = self.__class__.depreciation_percentatge.digits
+            self.depreciation_percentatge = Decimal(
+                12 / self.depreciation_duration).quantize(
+                Decimal(str(10 ** -digits[1])))
