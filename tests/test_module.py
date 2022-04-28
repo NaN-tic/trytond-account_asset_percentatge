@@ -1,15 +1,16 @@
-# This file is part account_asset_percentatge module for Tryton.
-# The COPYRIGHT file at the top level of this repository contains
-# the full copyright notices and license terms.
-import unittest
+
+# This file is part of Tryton.  The COPYRIGHT file at the top level of
+# this repository contains the full copyright notices and license terms.
+
+
 from trytond.tests.test_tryton import ModuleTestCase, with_transaction
-from trytond.tests.test_tryton import suite as test_suite
 from trytond.pool import Pool
 from decimal import Decimal
+from trytond.modules.company.tests import CompanyTestMixin
 
 
-class AccountAssetPercentatgeTestCase(ModuleTestCase):
-    'Test Account Asset Percentatge module'
+class AccountAssetPercentatgeTestCase(CompanyTestMixin, ModuleTestCase):
+    'Test AccountAssetPercentatge module'
     module = 'account_asset_percentatge'
 
     @with_transaction()
@@ -37,8 +38,5 @@ class AccountAssetPercentatgeTestCase(ModuleTestCase):
         template4.on_change_depreciation_duration()
         self.assertEqual(template4.depreciation_percentatge, Decimal('0.6667'))
 
-def suite():
-    suite = test_suite()
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            AccountAssetPercentatgeTestCase))
-    return suite
+
+del ModuleTestCase
