@@ -13,3 +13,9 @@ class Asset(metaclass=PoolMeta):
             'readonly': (Eval('lines', [0]) | (Eval('state') != 'draft')),
             },
         depends=['currency_digits', 'state'])
+
+    @classmethod
+    def __setup__(cls):
+        super().__setup__()
+        cls.account_journal.context = {'company': Eval('company')}
+        cls.account_journal.depends.append('company')
