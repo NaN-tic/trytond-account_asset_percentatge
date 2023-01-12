@@ -37,3 +37,7 @@ class Template(metaclass=PoolMeta):
             self.depreciation_percentatge = Decimal(
                 12 / self.depreciation_duration).quantize(
                 Decimal(str(10 ** -digits[1])))
+
+
+class Product(metaclass=PoolMeta):
+    __name__ = 'product.product'
