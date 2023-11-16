@@ -16,5 +16,5 @@ class Asset(metaclass=PoolMeta):
     @classmethod
     def __setup__(cls):
         super().__setup__()
-        cls.account_journal.context = {'company': Eval('company')}
+        cls.account_journal.context = {'company': Eval('company', -1)}
         cls.account_journal.depends.add('company')
