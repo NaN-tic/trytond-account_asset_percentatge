@@ -16,9 +16,7 @@ class Template(metaclass=PoolMeta):
                 'invisible': (~Eval('depreciable')
                     | (Eval('type', '') != 'assets')
                     | ~Eval('context', {}).get('company')),
-                },
-            depends=['depreciable', 'active', 'type'],
-            help='% deprecation to calculate months')
+                }, help='% deprecation to calculate months')
 
     @fields.depends('depreciation_percentatge')
     def on_change_depreciation_percentatge(self):

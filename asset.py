@@ -11,7 +11,7 @@ class Asset(metaclass=PoolMeta):
     purchase_value = Monetary('Purchase Value',
         digits='currency', currency='currency', states={
             'readonly': (Eval('lines', [0]) | (Eval('state') != 'draft')),
-        }, depends=['state'])
+        })
 
     @classmethod
     def __setup__(cls):
