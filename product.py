@@ -12,7 +12,6 @@ class Template(metaclass=PoolMeta):
     depreciation_percentatge = fields.Numeric(
             'Depreciation Percentatge', digits=(16, 4),
             states={
-                'readonly': ~Eval('active', True),
                 'invisible': (~Eval('depreciable')
                     | (Eval('type', '') != 'assets')
                     | ~Eval('context', {}).get('company')),
